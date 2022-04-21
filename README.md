@@ -22,4 +22,4 @@
 `npm run docker:down` 
 ## Production url
 
-`https://login-login-system-docker.herokuapp.com/` 
+`https://login-system-nest.herokuapp.com/` 
