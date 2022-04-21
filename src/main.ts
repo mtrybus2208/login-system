@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get<ConfigService>(ConfigService);
 
-  const port = configService.get<string>('SERVER_PORT');
+  const port = configService.get<string>('PORT');
 
   const config = new DocumentBuilder()
   .setTitle('Cats example')
