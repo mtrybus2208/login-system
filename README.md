@@ -17,6 +17,9 @@
 ## Run app in production mode
 
 `npm run docker:prod` 
-## Rmoves containers, networks abd volumes 
+## Removes containers, networks abd volumes 
 
 `npm run docker:down` 
+## Production url
+
+`https://login-login-system-docker.herokuapp.com/` 
