@@ -11,16 +11,16 @@ async function bootstrap() {
   const port = configService.get<string>('PORT');
 
   const config = new DocumentBuilder()
-  .setTitle('Cats example')
-  .setDescription('The cats API description')
-  .setVersion('1.0')
-  .addTag('cats')
-  .build();
+    .setTitle('Cats example')
+    .setDescription('The cats API description')
+    .setVersion('1.0')
+    .addTag('cats')
+    .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  console.log({ document})
-  
-   await app.listen(port, () => {
+  console.log({ document });
+
+  await app.listen(port, () => {
     Logger.log('Listening at http://localhost:' + port + '/');
   });
 }

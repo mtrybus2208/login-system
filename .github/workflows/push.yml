@@ -1,0 +1,11 @@
+name: nest-login-system builds
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: docker-compose up -d postgres_db dev
+      - name: Lint
+        run: npm run lint

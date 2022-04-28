@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "docker:start": "docker-compose up postgres_db dev",
+    "docker:start": "docker-compose up -d postgres_db dev",
     "docker:db": "docker-compose up -d postgres_db",
     "docker:dev": "docker-compose up dev",
     "docker:prod": "docker-compose up prod",
