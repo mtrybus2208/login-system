@@ -15,5 +15,3 @@ jobs:
           echo DB_PORT=${{ secrets.DB_PORT }} >> .env
       - name: Build the stack
         run: docker-compose up -d test
-      - name: Lint
-        run: npm run lint
