@@ -32,3 +32,13 @@ COPY . .
 COPY --from=development /usr/src/app/dist ./dist
 
 CMD ["node", "dist/main"]
+
+FROM development AS test
+
+ENV NODE_ENV=development
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+COPY . .

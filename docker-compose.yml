@@ -20,6 +20,20 @@ services:
       - .:/usr/src/app
       - usr/src/app/node_modules
     restart: always
+  test:
+    container_name: login_nest_test
+    image: login-nest-test:1.0.0
+    build:
+      context: .
+      target: test
+      dockerfile: ./Dockerfile
+    ports:
+      - 3001:3001
+      - 9228:9228 
+    command: npm run test
+    networks:
+      - nesjs-network  
+    restart: always
   prod:
     container_name: login_nest_prod
     image: login-nest-prod:1.0.0
