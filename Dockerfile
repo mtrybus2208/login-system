@@ -1,4 +1,4 @@
-FROM node:12.13-alpine AS development
+FROM node:16-alpine AS development
 
 ENV NODE_ENV=development
 
@@ -16,7 +16,7 @@ COPY . .
 
 RUN npm run build
 
-FROM node:12.13-alpine as production
+FROM node:16-alpine as production
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
