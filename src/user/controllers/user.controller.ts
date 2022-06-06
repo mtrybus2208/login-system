@@ -11,4 +11,3 @@ export class UserController {
     return this.userService.getAll();
   }
 }
-nvm install 6.9.2

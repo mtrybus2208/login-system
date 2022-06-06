@@ -11,6 +11,7 @@ services:
     ports:
       - ${PORT}:${PORT}
       - 9229:9229
+    command: npm run start:dev
     networks:
       - nesjs-network
     depends_on:
