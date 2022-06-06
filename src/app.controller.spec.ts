@@ -21,15 +21,12 @@ describe('AppController', () => {
     }).compile();
 
     appController = app.get<AppController>(AppController);
-    console.log(appController)
+    console.log(appController);
   });
 
   describe('root', () => {
     it('should be defined', () => {
       expect(appController).toBeDefined();
     });
-    // it('should return "Hello World!"', () => {
-    //   expect(appController.getHello()).toBe('Hello World!');
-    // });
   });
 });
