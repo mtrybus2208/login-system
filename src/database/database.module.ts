@@ -7,8 +7,11 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) =>
-        ({
+      useFactory: async (configService: ConfigService) => {
+        console.log({
+          ENV: configService.get<string>('env'),
+        });
+        return {
           type: 'postgres' as const,
           host: configService.get<string>('database.host', 'localhost'),
           port: configService.get<number>('database.port', 5432),
@@ -17,7 +20,11 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
           database: configService.get('database.database', 'db'),
           synchronize: true, // !!nedd to be changed
           autoLoadEntities: true,
-        } as TypeOrmModuleOptions),
+          ...(configService.get<string>('env') !== 'development' && {
+            ssl: { rejectUnauthorized: false },
+          }),
+        } as TypeOrmModuleOptions;
+      },
     }),
   ],
 })
