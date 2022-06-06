@@ -10,15 +10,14 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - ${PORT}:${PORT}
-      - 9229:9229 
-    command: npm run start:dev
+      - 9229:9229
     networks:
       - nesjs-network
     depends_on:
       - postgres_db
     volumes:
       - .:/usr/src/app
-      - usr/src/app/node_modules
+      - /usr/src/app/node_modules
     restart: always
   prod:
     container_name: login_nest_prod
@@ -49,7 +48,9 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - ${DB_PORT}:${DB_PORT}
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    networks:
+      - nesjs-network
 networks:
   nesjs-network:
 volumes:
