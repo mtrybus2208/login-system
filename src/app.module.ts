@@ -12,7 +12,6 @@ import { DatabaseModule } from './database/database.module';
     ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
     DatabaseModule,
     UserModule,
-
     CoreModule,
     AuthModule,
   ],
