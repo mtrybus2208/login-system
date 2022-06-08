@@ -7,24 +7,23 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => {
-        console.log({
-          ENV: configService.get<string>('env'),
-        });
-        return {
-          type: 'postgres' as const,
-          host: configService.get<string>('database.host', 'localhost'),
-          port: configService.get<number>('database.port', 5432),
-          username: configService.get('database.username', 'postgres'),
-          password: configService.get('database.password', 'postgres'),
-          database: configService.get('database.database', 'db'),
-          synchronize: true, // !!nedd to be changed
-          autoLoadEntities: true,
-          ...(configService.get<string>('env') !== 'development' && {
-            ssl: { rejectUnauthorized: false },
-          }),
-        } as TypeOrmModuleOptions;
-      },
+      useFactory: async (
+        configService: ConfigService,
+      ): Promise<TypeOrmModuleOptions> => ({
+        type: 'postgres' as const,
+        host: configService.get<string>('database.host', 'localhost'),
+        port: configService.get<number>('database.port', 5432),
+        username: configService.get<string>('database.username', 'postgres'),
+        password: configService.get<string>('database.password', 'postgres'),
+        database: configService.get<string>('database.database', 'db'),
+        synchronize: false,
+        entities: ['src/**/**.entity{.ts,.js}'],
+        autoLoadEntities: true,
+        migrations: ['src/migrations/*.ts'],
+        ...(configService.get<string>('env') !== 'development' && {
+          ssl: { rejectUnauthorized: false },
+        }),
+      }),
     }),
   ],
 })
