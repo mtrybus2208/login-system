@@ -19,13 +19,17 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "docker:start": "docker-compose up -d postgres_db dev",
     "docker:db": "docker-compose up -d postgres_db",
     "docker:dev": "docker-compose up dev",
     "docker:prod": "docker-compose up prod",
     "docker:down": "docker-compose down --volumes",
-    "docker:dev-rebuild:": "docker compose up --build -V dev",
-    "docker:dev-shell": "docker exec -it login_nest_dev sh"
+    "docker:dev:rebuild": "docker compose up --build -V dev",
+    "docker:dev:shell": "docker exec -it login_nest_dev sh",
+    "typeorm:cli": "typeorm-ts-node-esm -d ./ormconfig.ts",
+    "migration:run": "npm run typeorm:cli -- migration:run",
+    "migration:revert": "npm run typeorm:cli -- migration:revert",
+    "migration:prod:run": "cross-env NODE_ENV=production npm run typeorm:cli -- migration:run",
+    "migration:prod:revert": "cross-env NODE_ENV=production npm run typeorm:cli -- migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^8.4.4",
@@ -46,8 +50,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.5",
-    "swagger-ui-express": "^4.3.0",
-    "typeorm": "^0.3.6"
+    "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.2.5",
@@ -57,6 +60,7 @@
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
+    "cross-env": "^7.0.3",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "7.1.0",
     "eslint-plugin-prettier": "^3.1.4",
